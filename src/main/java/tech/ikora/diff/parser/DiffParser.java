@@ -3,6 +3,7 @@ package tech.ikora.diff.parser;
 import tech.ikora.diff.patch.Change;
 import tech.ikora.diff.patch.Hunk;
 import tech.ikora.diff.patch.Patch;
+import tech.ikora.diff.patch.Patches;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class DiffParser {
     private String newPrefix = "b/";
 
     private Patch current = null;
-    private List<Patch> patches = null;
+    private Patches patches = null;
 
 
     public DiffParser setOldPrefix(String oldPrefix) {
@@ -45,13 +46,13 @@ public class DiffParser {
         return this;
     }
 
-    public List<Patch> parse(String diff) throws IOException, MalformedDiffException {
+    public Patches parse(String diff) throws IOException, MalformedDiffException {
         return parse(new ByteArrayInputStream(diff.getBytes()));
     }
 
-    public List<Patch> parse(InputStream in) throws IOException, MalformedDiffException {
+    public Patches parse(InputStream in) throws IOException, MalformedDiffException {
         current = null;
-        patches = new ArrayList<>();
+        patches = new Patches();
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 

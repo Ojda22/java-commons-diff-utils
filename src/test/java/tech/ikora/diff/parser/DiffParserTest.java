@@ -5,12 +5,12 @@ import tech.ikora.diff.Helpers;
 import tech.ikora.diff.patch.Change;
 import tech.ikora.diff.patch.Hunk;
 import tech.ikora.diff.patch.Patch;
+import tech.ikora.diff.patch.Patches;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,10 +18,10 @@ class DiffParserTest {
     @Test
     void parseWithDiff1() throws IOException, URISyntaxException, MalformedDiffException {
         final File file = Helpers.getResourceFile("diff-1.txt");
-        final List<Patch> patches = new DiffParser().parse(new FileInputStream(file));
+        final Patches patches = new DiffParser().parse(new FileInputStream(file));
 
         assertEquals(1, patches.size());
-        final Patch patch = patches.get(0);
+        final Patch patch = patches.getByIndex(0);
 
         assertEquals(Patch.ChangeType.RENAME, patch.getChangeType());
         assertEquals("builtin-http-fetch.c", patch.getOldFile());
@@ -44,13 +44,13 @@ class DiffParserTest {
     @Test
     void parseWithDiff2() throws IOException, URISyntaxException, MalformedDiffException {
         final File file = Helpers.getResourceFile("diff-2.txt");
-        final List<Patch> patches = new DiffParser()
+        final Patches patches = new DiffParser()
                 .setOldPrefix("old/")
                 .setNewPrefix("new/")
                 .parse(new FileInputStream(file));
 
         assertEquals(4, patches.size());
-        final Patch patch = patches.get(2);
+        final Patch patch = patches.getByIndex(2);
 
         assertEquals("/dev/null", patch.getOldFile());
         assertEquals("src/main/java/com/example/demo/integration/Belly.java", patch.getNewFile());
