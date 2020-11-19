@@ -44,10 +44,16 @@ class DiffParserTest {
     @Test
     void parseWithDiff2() throws IOException, URISyntaxException, MalformedDiffException {
         final File file = Helpers.getResourceFile("diff-2.txt");
-        final List<Patch> patches = new DiffParser().parse(new FileInputStream(file));
+        final List<Patch> patches = new DiffParser()
+                .setOldPrefix("old/")
+                .setNewPrefix("new/")
+                .parse(new FileInputStream(file));
 
         assertEquals(4, patches.size());
         final Patch patch = patches.get(2);
+
+        assertEquals("/dev/null", patch.getOldFile());
+        assertEquals("src/main/java/com/example/demo/integration/Belly.java", patch.getNewFile());
 
         assertEquals(Patch.ChangeType.ADD, patch.getChangeType());
     }
