@@ -1,0 +1,103 @@
+diff --git old/pom.xml new/pom.xml
+index 8872e42..b68d05a 100644
+--- old/pom.xml
++++ new/pom.xml
+@@ -6,7 +6,7 @@
+ 	<parent>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-parent</artifactId>
+-		<version>2.3.5.RELEASE</version>
++		<version>2.2.5.RELEASE</version>
+ 		<relativePath /> <!-- lookup parent from repository -->
+ 	</parent>
+
+diff --git old/src/main/java/com/example/demo/controller/StudentController.java new/src/main/java/com/example/demo/controller/StudentController.java
+index ead6422..23035f2 100644
+--- old/src/main/java/com/example/demo/controller/StudentController.java
++++ new/src/main/java/com/example/demo/controller/StudentController.java
+@@ -2,6 +2,8 @@
+
+ import java.util.List;
+
++import javax.validation.Valid;
++
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Controller;
+ import org.springframework.ui.Model;
+@@ -15,6 +17,8 @@
+ import com.example.demo.model.Student;
+ import com.example.demo.service.StudentService;
+
++
++
+ @Controller
+ public class StudentController {
+
+@@ -22,10 +26,11 @@
+ 	private StudentService studentService;
+
+ 	@RequestMapping(value="/students", method = RequestMethod.GET)
+-	public ModelAndView students(){
++	// SERVLET -> handling mapping
++	public ModelAndView students(){
+ 		List<Student> students = studentService.findAll();
+ 		ModelAndView modelAndView = new ModelAndView();
+-		modelAndView.addObject("students", students);
++		modelAndView.addObject("students", students);// set the attributes to view files
+ 		modelAndView.setViewName("student/list");
+ 		return modelAndView;
+ 	}
+@@ -37,7 +42,9 @@
+ 	}
+
+ 	@RequestMapping(value = "/student", method = RequestMethod.POST)
+-	public String edit(@ModelAttribute("student") Student student, BindingResult result, Model model)  {
++	public String edit(@Valid @ModelAttribute("student") Student student,
++			BindingResult result, Model model)  {
++
+ 		if (result.hasErrors()) {
+ 			model.addAttribute("errors", result.getAllErrors());
+ 			return "student/edit";
+diff --git old/src/main/java/com/example/demo/integration/Belly.java new/src/main/java/com/example/demo/integration/Belly.java
+new file mode 100644
+index 0000000..6e3d6eb
+--- /dev/null
++++ new/src/main/java/com/example/demo/integration/Belly.java
+@@ -0,0 +1,7 @@
++package com.example.demo.integration;
++
++public class Belly {
++    public void eat(int cukes) {
++
++    }
++}
+diff --git old/src/main/java/com/example/demo/model/Student.java new/src/main/java/com/example/demo/model/Student.java
+index 8f224d4..054f417 100644
+--- old/src/main/java/com/example/demo/model/Student.java
++++ new/src/main/java/com/example/demo/model/Student.java
+@@ -6,6 +6,8 @@
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
+ import javax.persistence.Table;
++import javax.validation.constraints.Email;
++import javax.validation.constraints.NotBlank;
+
+ @Entity
+ @Table(name = "students")
+@@ -16,12 +18,16 @@
+ 	private Long id;
+
+ 	@Column(name = "first_name", nullable=false)
++	@NotBlank
+ 	private String firstName;
+
+ 	@Column(name = "last_name", nullable=false)
++	@NotBlank
+ 	private String lastName;
+
+ 	@Column(name = "email", nullable=false)
++	@NotBlank
++	@Email
+ 	private String email;
+
+ 	public Long getId() {
