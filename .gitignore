@@ -1,5 +1,5 @@
 # Project exclude paths
 /target/
 
-/diff-utils.iml.iml
+/diff-utils.iml
 /.idea/
