@@ -1,4 +1,4 @@
-package tech.ikora.diff.patch;
+package lu.uni.serval.diff.patch;
 
 import java.util.ArrayList;
 import java.util.Iterator;

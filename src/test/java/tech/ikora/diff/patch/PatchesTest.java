@@ -1,10 +1,10 @@
-package tech.ikora.diff.patch;
+package lu.uni.serval.diff.patch;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import tech.ikora.diff.Helpers;
-import tech.ikora.diff.parser.DiffParser;
-import tech.ikora.diff.parser.MalformedDiffException;
+import lu.uni.serval.diff.Helpers;
+import lu.uni.serval.diff.parser.DiffParser;
+import lu.uni.serval.diff.parser.MalformedDiffException;
 
 import java.io.File;
 import java.io.FileInputStream;

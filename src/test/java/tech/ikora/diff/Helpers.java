@@ -1,4 +1,4 @@
-package tech.ikora.diff;
+package lu.uni.serval.diff;
 
 import java.io.File;
 import java.io.IOException;

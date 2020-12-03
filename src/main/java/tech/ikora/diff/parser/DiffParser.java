@@ -1,9 +1,9 @@
-package tech.ikora.diff.parser;
+package lu.uni.serval.diff.parser;
 
-import tech.ikora.diff.patch.Change;
-import tech.ikora.diff.patch.Hunk;
-import tech.ikora.diff.patch.Patch;
-import tech.ikora.diff.patch.Patches;
+import lu.uni.serval.diff.patch.Change;
+import lu.uni.serval.diff.patch.Hunk;
+import lu.uni.serval.diff.patch.Patch;
+import lu.uni.serval.diff.patch.Patches;
 
 import java.io.*;
 import java.util.ArrayList;
