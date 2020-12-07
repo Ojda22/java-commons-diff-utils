@@ -1,0 +1,24 @@
+diff --git a/src/test/java/com/example/demo/integration/StudentStepsDefinitions.java b/src/test/java/com/example/demo/integration/StudentStepsDefinitions.java
+index 9216dc9..0ae861e 100644
+--- a/src/test/java/com/example/demo/integration/StudentStepsDefinitions.java
++++ b/src/test/java/com/example/demo/integration/StudentStepsDefinitions.java
+@@ -13,8 +13,7 @@ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
+
+ public class StudentStepsDefinitions extends SpringIntegrationTest {
+-
+-       WebDriver driver;
++       private WebDriver driver;
+
+        @Given("^Open the Chrome and launch the application$")
+        public void open_the_chrome_and_launch_the_application() throws Throwable {
+@@ -47,7 +46,9 @@ public class StudentStepsDefinitions extends SpringIntegrationTest {
+        public void verify_redurect_to_student__listpage() throws Throwable {
+                String actualString = driver.findElement(By.className("student_list_heading")).getText();
+                assertTrue(actualString.contains("Student List"));
++
+                driver.close();
++               driver.quit();
+        }
+
+ }

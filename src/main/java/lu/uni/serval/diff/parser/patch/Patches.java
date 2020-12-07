@@ -1,4 +1,4 @@
-package lu.uni.serval.diff.patch;
+package lu.uni.serval.diff.parser.patch;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +44,6 @@ public class Patches implements Iterable<Patch> {
 
     private static boolean isFile(Patch patch, String name, boolean strict, Side side){
         final String target = side == Side.OLD ? patch.getOldFile() : patch.getNewFile();
-        return strict ? name.equals(target) : name.endsWith(target);
+        return strict ? name.equals(target) : (target.endsWith(name) || name.endsWith(target));
     }
 }

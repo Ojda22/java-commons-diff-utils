@@ -1,10 +1,10 @@
-package lu.uni.serval.diff.patch;
+package lu.uni.serval.diff.parser.patch;
 
+import lu.uni.serval.diff.parser.parser.DiffParser;
+import lu.uni.serval.diff.parser.parser.MalformedDiffException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import lu.uni.serval.diff.Helpers;
-import lu.uni.serval.diff.parser.DiffParser;
-import lu.uni.serval.diff.parser.MalformedDiffException;
+import lu.uni.serval.diff.parser.Helpers;
 
 import java.io.File;
 import java.io.FileInputStream;

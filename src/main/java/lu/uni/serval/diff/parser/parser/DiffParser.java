@@ -1,13 +1,11 @@
-package lu.uni.serval.diff.parser;
+package lu.uni.serval.diff.parser.parser;
 
-import lu.uni.serval.diff.patch.Change;
-import lu.uni.serval.diff.patch.Hunk;
-import lu.uni.serval.diff.patch.Patch;
-import lu.uni.serval.diff.patch.Patches;
+import lu.uni.serval.diff.parser.patch.Change;
+import lu.uni.serval.diff.parser.patch.Hunk;
+import lu.uni.serval.diff.parser.patch.Patch;
+import lu.uni.serval.diff.parser.patch.Patches;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

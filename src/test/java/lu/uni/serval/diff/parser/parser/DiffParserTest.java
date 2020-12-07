@@ -1,11 +1,11 @@
-package lu.uni.serval.diff.parser;
+package lu.uni.serval.diff.parser.parser;
 
+import lu.uni.serval.diff.parser.Helpers;
+import lu.uni.serval.diff.parser.patch.Hunk;
 import org.junit.jupiter.api.Test;
-import lu.uni.serval.diff.Helpers;
-import lu.uni.serval.diff.patch.Change;
-import lu.uni.serval.diff.patch.Hunk;
-import lu.uni.serval.diff.patch.Patch;
-import lu.uni.serval.diff.patch.Patches;
+import lu.uni.serval.diff.parser.patch.Change;
+import lu.uni.serval.diff.parser.patch.Patch;
+import lu.uni.serval.diff.parser.patch.Patches;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package lu.uni.serval.diff.patch;
+package lu.uni.serval.diff.parser.patch;
 
 import java.util.ArrayList;
 import java.util.List;
