@@ -7,16 +7,16 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>Diff-Utils</name>
-    <url>https://github.com/UL-SnT-Serval/diff-utils</url>
+    <url>https://github.com/UL-SnT-Serval/java-commons-diff-utils</url>
 
     <description>
         Utils to assist git diff parsing
     </description>
 
     <scm>
-        <connection>scm:git:git://github.com/UL-SnT-Serval/git-utils.git</connection>
+        <connection>scm:git:git@github.com:UL-SnT-Serval/java-commons-diff-utils.git</connection>
         <developerConnection>scm:git:git@github.com:UL-SnT-Serval/UL-SnT-Serval.git</developerConnection>
-        <url>https://github.com/UL-SnT-Serval/git-utils</url>
+        <url>https://github.com/UL-SnT-Serval/java-commons-diff-utils</url>
     </scm>
 
     <licenses>
