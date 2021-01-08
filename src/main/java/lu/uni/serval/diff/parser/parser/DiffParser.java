@@ -45,12 +45,20 @@ public class DiffParser {
     }
 
     public Patches parse(String diff) throws IOException, MalformedDiffException {
+        if(diff == null || diff.isEmpty()){
+            return new Patches();
+        }
+
         return parse(new ByteArrayInputStream(diff.getBytes()));
     }
 
     public Patches parse(InputStream in) throws IOException, MalformedDiffException {
         current = null;
         patches = new Patches();
+
+        if(in == null){
+            return patches;
+        }
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
