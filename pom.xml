@@ -17,6 +17,7 @@
         <connection>scm:git:git@github.com:UL-SnT-Serval/java-commons-diff-utils.git</connection>
         <developerConnection>scm:git:git@github.com:UL-SnT-Serval/UL-SnT-Serval.git</developerConnection>
         <url>https://github.com/UL-SnT-Serval/java-commons-diff-utils</url>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>
