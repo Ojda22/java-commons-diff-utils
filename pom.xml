@@ -4,7 +4,7 @@
 
     <groupId>lu.uni.serval</groupId>
     <artifactId>diff-utils</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>Diff-Utils</name>
     <url>https://github.com/UL-SnT-Serval/java-commons-diff-utils</url>
