@@ -25,7 +25,6 @@ public class DiffParser {
 
     private static final Pattern SIMILARITY_REGEX = Pattern.compile("^(similarity\\sindex\\s)(\\d+)(%)");
     private static final Pattern HUNK_REGEX = Pattern.compile("^@@\\s\\+|-(\\d+)(,(\\d+))?\\s+\\+(\\d+)(,(\\d+))");
-    private static final String code = "";
 
     private String oldPrefix = "a/";
     private String newPrefix = "b/";

@@ -5,6 +5,8 @@ import lu.uni.serval.diff.parser.parser.MalformedDiffException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import lu.uni.serval.diff.parser.Helpers;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,13 +43,17 @@ class PatchesTest {
         assertEquals("src/main/java/com/example/demo/model/Student.java", patch3.getNewFile());
     }
 
-    @Test
-    void testGetByOldFileStrict(){
-        final String path = "builtin-http-fetch.c";
-        final Optional<Patch> patch = patches1.getByOldFile(path, true);
+    @ParameterizedTest
+    @CsvSource({
+            "builtin-http-fetch.c,true,builtin-http-fetch.c",
+            "builtin-http-fetch.c,false,builtin-http-fetch.c",
+            "some/path/builtin-http-fetch.c,false,builtin-http-fetch.c"
+    })
+    void testGetByOldFile(String path, boolean strict, String expected){
+        final Optional<Patch> patch = patches1.getByOldFile(path, strict);
 
         assertTrue(patch.isPresent());
-        assertEquals("builtin-http-fetch.c", patch.get().getOldFile());
+        assertEquals(expected, patch.get().getOldFile());
     }
 
     @Test
@@ -59,24 +65,6 @@ class PatchesTest {
     }
 
     @Test
-    void testGetByOldFile(){
-        final String path = "builtin-http-fetch.c";
-        final Optional<Patch> patch = patches1.getByOldFile(path, false);
-
-        assertTrue(patch.isPresent());
-        assertEquals("builtin-http-fetch.c", patch.get().getOldFile());
-    }
-
-    @Test
-    void testGetByOldFileWithFullPath(){
-        final String path = "some/path/builtin-http-fetch.c";
-        final Optional<Patch> patch = patches1.getByOldFile(path, false);
-
-        assertTrue(patch.isPresent());
-        assertEquals("builtin-http-fetch.c", patch.get().getOldFile());
-    }
-
-    @Test
     void testGetByOldFileWithWrongPath(){
         final String path = "http-fetch-fake.c";
         final Optional<Patch> patch = patches1.getByOldFile(path, false);
@@ -84,13 +72,17 @@ class PatchesTest {
         assertFalse(patch.isPresent());
     }
 
-    @Test
-    void testGetByNewFileStrict(){
-        final String path = "http-fetch.c";
-        final Optional<Patch> patch = patches1.getByNewFile(path, true);
+    @ParameterizedTest
+    @CsvSource({
+            "http-fetch.c,true,http-fetch.c",
+            "http-fetch.c,false,http-fetch.c",
+            "some/path/http-fetch.c,false,http-fetch.c"
+    })
+    void testGetByNewFile(String path, boolean strict, String expected){
+        final Optional<Patch> patch = patches1.getByNewFile(path, strict);
 
         assertTrue(patch.isPresent());
-        assertEquals("http-fetch.c", patch.get().getNewFile());
+        assertEquals(expected, patch.get().getNewFile());
     }
 
     @Test
@@ -99,24 +91,6 @@ class PatchesTest {
         final Optional<Patch> patch = patches1.getByNewFile(path, true);
 
         assertFalse(patch.isPresent());
-    }
-
-    @Test
-    void testGetByNewFile(){
-        final String path = "http-fetch.c";
-        final Optional<Patch> patch = patches1.getByNewFile(path, false);
-
-        assertTrue(patch.isPresent());
-        assertEquals("http-fetch.c", patch.get().getNewFile());
-    }
-
-    @Test
-    void testGetByNewFileWithFullPath(){
-        final String path = "some/path/http-fetch.c";
-        final Optional<Patch> patch = patches1.getByNewFile(path, false);
-
-        assertTrue(patch.isPresent());
-        assertEquals("http-fetch.c", patch.get().getNewFile());
     }
 
     @Test

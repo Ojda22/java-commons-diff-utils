@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StackTraceMapper {
+    private StackTraceMapper() {}
+
     public static String map(String newStackTrace, String diff){
         try {
             final Patches patches = new DiffParser().parse(diff);
