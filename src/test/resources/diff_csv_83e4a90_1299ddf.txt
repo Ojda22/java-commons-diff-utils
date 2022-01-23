@@ -1,0 +1,49 @@
+diff --git a/src/main/java/org/apache/commons/csv/CSVLexer.java b/src/main/java/org/apache/commons/csv/CSVLexer.java
+index 1909fa3..f26a1ec 100644
+--- a/src/main/java/org/apache/commons/csv/CSVLexer.java
++++ b/src/main/java/org/apache/commons/csv/CSVLexer.java
+@@ -56,7 +56,7 @@ class CSVLexer extends Lexer {
+         c = in.readAgain(); 56 -> 56 
+ 				57 -> 57
+         //  empty line detection: eol AND (last char was EOL or beginning) 58 -> 58
+-        if (format.isEmptyLinesIgnored()) {  	59 -> 0
++        if (emptyLinesIgnored) {		0 -> 59
+             while (eol 			60 -> 60
+                     && (lastChar == '\n' || lastChar == '\r' || lastChar == ExtendedBufferedReader.UNDEFINED)  61 -> 61
+                     && !isEndOfFile(lastChar)) {		62 -> 62
+@@ -74,7 +74,7 @@ class CSVLexer extends Lexer {
+         }	74 -> 74
+ 		75 -> 75
+         // did we reach eof during the last iteration already ? EOF   	76 -> 76	
+-        if (isEndOfFile(lastChar) || (lastChar != format.getDelimiter() && isEndOfFile(c))) { 		77 -> 0
++        if (isEndOfFile(lastChar) || (!isDelimiter(lastChar) && isEndOfFile(c))) {			0 -> 77
+             tkn.type = EOF;		78 -> 78
+             return tkn;		79 -> 79
+         }			80 -> 80
+@@ -82,7 +82,7 @@ class CSVLexer extends Lexer {
+         //  important: make sure a new char gets consumed in each iteration	82 -> 82
+         while (!tkn.isReady && tkn.type != EOF) {			83 -> 83
+             // ignore whitespaces at beginning of a token		84 -> 84
+-            if (format.isLeadingSpacesIgnored()) {			85 -> 0
++            if (leadingSpacesIgnored) {				0 -> 85
+                 while (isWhitespace(c) && !eol) {			86 -> 86
+                     wsBuf.append((char) c);				86 -> 86
+                     c = in.read();					87 -> 87
+@@ -115,7 +115,7 @@ class CSVLexer extends Lexer {
+             } else {					115 -> 115
+                 // next token must be a simple token		116 -> 116
+                 // add removed blanks when not ignoring whitespace chars...	117 -> 117
+-                if (!format.isLeadingSpacesIgnored()) {		118 -> 0
++                if (!leadingSpacesIgnored) {				0 -> 118
+                     tkn.content.append(wsBuf);				119 -> 119
+                 }							120 -> 120
+                 simpleTokenLexer(tkn, c);				121 -> 121
+@@ -167,7 +167,7 @@ class CSVLexer extends Lexer {
+             c = in.read();				167 -> 167
+         }						168 -> 168
+ 							169 -> 169
+-        if (format.isTrailingSpacesIgnored()) {	170 -> 0
++        if (trailingSpacesIgnored) {			0 -> 170
+             trimTrailingSpaces(tkn.content);		171 -> 171
+         }						172 -> 172
+ 

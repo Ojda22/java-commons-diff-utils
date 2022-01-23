@@ -1,0 +1,25 @@
+diff --git a/src/main/java/org/apache/commons/csv/Token.java b/src/main/java/org/apache/commons/csv/Token.java
+index 5c7e8fb..42cec47 100644
+--- a/src/main/java/org/apache/commons/csv/Token.java
++++ b/src/main/java/org/apache/commons/csv/Token.java
+@@ -41,7 +41,10 @@ class Token {
+         EOF, 41 -> 41
+         	42 -> 42
+         /** Token with content when end of a line is reached. */ 43 -> 43
+-        EORECORD 44 -> 0
++        EORECORD, 0 -> 44
++        		0 -> 45
++        /** Token is a comment line */  0 -> 46
++        COMMENT		0 -> 47
+     } 45 -> 48
+     	46 -> 49
+     /** Token type */ 47 -> 50 ---> continue with 1 - 1 mapping until next hunk
+@@ -63,6 +66,6 @@ class Token {
+     // Provide toString method for IDE debugging  63 -> 66
+     @Override  		64 -> 67
+     public String toString() {    65 -> 68
+-        return type.name();	66 -> 0
++        return type.name()+" ["+content.toString()+"]"; 0 -> 69
+     }	67 -> 70
+ }	68 -> 71
+\ No newline at end of file

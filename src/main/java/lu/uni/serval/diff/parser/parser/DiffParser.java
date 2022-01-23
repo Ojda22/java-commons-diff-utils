@@ -204,14 +204,15 @@ public class DiffParser {
                 break;
             }
             else if(sign == '+'){
+                hunk.addLinePair(0, newPosition);
                 hunk.addChange(new Change(Change.Type.ADD, newPosition++, content.substring(1)));
             }
             else if(sign == '-'){
+                hunk.addLinePair(oldPosition, 0);
                 hunk.addChange(new Change(Change.Type.REMOVE, oldPosition++, content.substring(1)));
             }
             else{
-                ++newPosition;
-                ++oldPosition;
+                hunk.addLinePair(oldPosition++, newPosition++);
             }
         }
 
