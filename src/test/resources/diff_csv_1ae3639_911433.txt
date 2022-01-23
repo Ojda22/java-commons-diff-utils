@@ -1,0 +1,33 @@
+diff --git a/src/main/java/org/apache/commons/csv/Lexer.java b/src/main/java/org/apache/commons/csv/Lexer.java
+index 4d3f18d..49e946f 100644
+--- a/src/main/java/org/apache/commons/csv/Lexer.java
++++ b/src/main/java/org/apache/commons/csv/Lexer.java
+@@ -34,6 +34,8 @@ abstract class Lexer {
+     private final char encapsulator; 34 -> 34
+     private final char commmentStart; 35 -> 35
+     					36 -> 36
++    final boolean surroundingSpacesIgnored; 0 -> 37
++    final boolean emptyLinesIgnored;	    0 -> 38
+     					37 -> 39
+     final CSVFormat format;		38 -> 40
+     					39 -> 41
+@@ -50,15 +52,17 @@ abstract class Lexer {
+         this.escape = format.getEscape();  50 -> 52
+         this.encapsulator = format.getEncapsulator(); 51 -> 53
+         this.commmentStart = format.getCommentStart(); 52 -> 54
++        this.surroundingSpacesIgnored = format.isSurroundingSpacesIgnored(); 0 -> 55
++        this.emptyLinesIgnored = format.isEmptyLinesIgnored();     	0 -> 56
+     }									53 -> 57
+ 									54 -> 58
+     int getLineNumber() {					55 -> 59
+         return in.getLineNumber();				56 -> 60
+     }								57 -> 61
+ 								58 -> 62
+-    int readEscape(int c) throws IOException {			59 -> 0
++    int readEscape() throws IOException {			0 -> 63
+         // assume c is the escape char (normally a backslash)	60 -> 64
+-        c = in.read();						61 -> 0
++        int c = in.read();					0 -> 65
+         switch (c) {						62 -> 66
+             case 'r':						63 -> 67
+                 return '\r';					64 -> 68

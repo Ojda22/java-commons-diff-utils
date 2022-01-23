@@ -21,11 +21,8 @@ package lu.uni.serval.diff.parser.parser;
  */
 
 import lu.uni.serval.diff.parser.Helpers;
-import lu.uni.serval.diff.parser.patch.Hunk;
+import lu.uni.serval.diff.parser.patch.*;
 import org.junit.jupiter.api.Test;
-import lu.uni.serval.diff.parser.patch.Change;
-import lu.uni.serval.diff.parser.patch.Patch;
-import lu.uni.serval.diff.parser.patch.Patches;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,6 +49,7 @@ class DiffParserTest {
 
         assertEquals(2, patch.getHunks().size());
         final Hunk hunk = patch.getHunks().get(0);
+        final Hunk hunk2 = patch.getHunks().get(1);
 
         assertEquals(3, hunk.getChanges().size());
         final Change change = hunk.getChanges().get(0);
@@ -59,6 +57,13 @@ class DiffParserTest {
         assertEquals(Change.Type.REMOVE, change.getType());
         assertEquals("int cmd_http_fetch(int argc, const char **argv, const char *prefix)", change.getContent());
         assertEquals(4, change.getPosition());
+
+        assertEquals(new LinePair(1, 1), hunk.lineMapping.get(0));
+        assertEquals(new LinePair(8, 9), hunk.lineMapping.get(hunk.lineMapping.size()-1));
+
+        assertEquals(new LinePair(18, 19), hunk2.lineMapping.get(0));
+        assertEquals(new LinePair(23, 26), hunk2.lineMapping.get(hunk2.lineMapping.size()-1));
+
     }
 
     @Test
@@ -76,5 +81,27 @@ class DiffParserTest {
         assertEquals("src/main/java/com/example/demo/integration/Belly.java", patch.getNewFile());
 
         assertEquals(Patch.ChangeType.ADD, patch.getChangeType());
+    }
+
+    @Test
+    void parseWithDiff3() throws IOException, URISyntaxException, MalformedDiffException {
+        final File file = Helpers.getResourceFile("diff_csv_1ae3639_911433.txt");
+        final Patches patches = new DiffParser().parse(new FileInputStream(file));
+
+        assertEquals(1, patches.size());
+        final Patch patch = patches.getByIndex(0);
+
+        final Hunk hunk = patch.getHunks().get(0);
+        final Hunk hunk2 = patch.getHunks().get(1);
+
+        assertEquals(8, hunk.lineMapping.size());
+        assertEquals(19, hunk2.lineMapping.size());
+
+        assertEquals(new LinePair(34, 34), hunk.lineMapping.get(0));
+        assertEquals(new LinePair(39, 41), hunk.lineMapping.get(hunk.lineMapping.size()-1));
+
+        assertEquals(new LinePair(50, 52), hunk2.lineMapping.get(0));
+        assertEquals(new LinePair(64, 68), hunk2.lineMapping.get(hunk2.lineMapping.size()-1));
+
     }
 }
